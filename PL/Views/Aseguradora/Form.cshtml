@@ -1,0 +1,85 @@
+﻿@model  ML.Aseguradora
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Aseguradora</h2>
+            <h5>Ingrese los datos de la aseguradora:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Aseguradora", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.IdAseguradora)
+                        @Html.TextBoxFor(model => model.IdAseguradora, new { @class = "form-control", @id = "txtIdUsuario" })
+                        @Html.ValidationMessageFor(model => model.IdAseguradora)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+
+                    </div>
+                </div>
+            
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6 ">
+                        @Html.LabelFor(model => model.FechaCreacion)
+                        @Html.TextBoxFor(model => model.FechaCreacion, new { @class = "form-control", @id = "txtFechaCreacion" })
+                        @Html.ValidationMessageFor(model => model.FechaCreacion)
+
+                    </div>
+                </div>
+
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.FechaModificacion)
+                        @Html.TextBoxFor(model => model.FechaModificacion, new { @class = "form-control", @id = "txtFechaModificacion" })
+                        @Html.ValidationMessageFor(model => model.FechaModificacion)
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Usuario.IdUsuario)
+@*                        @Html.TextBoxFor(model => model.Usuario.IdUsuario, new { @class = "form-control", @id = "txtIdUsuario" })
+*@                      @Html.DropDownListFor(model => model.Usuario.IdUsuario, new SelectList(Model.Usuario.Usuarios, "IdUsuario", "UserName"), "Selecciona un UserName", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Usuario.IdUsuario)
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Aseguradora", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
