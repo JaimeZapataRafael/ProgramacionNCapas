@@ -12,7 +12,9 @@ namespace DL
         public int? IdUsuario { get; set; }
 
         public virtual Usuario? IdUsuarioNavigation { get; set; }
-        public string? UserName { get; set; }
 
+        //alias
+
+        public string UserName { get; set; }
     }
 }

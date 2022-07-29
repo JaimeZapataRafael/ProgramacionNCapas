@@ -85,6 +85,14 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult Form(ML.Usuario usuario)
         {
+            IFormFile imagen = Request.Form.Files["fuImage"];
+            if (imagen != null)
+            {
+                byte[] ImagenByte = ConvertToBytes(imagen);
+                usuario.Imagen = Convert.ToBase64String(ImagenByte);
+
+            }
+
             if (usuario.IdUsuario == 0)
             {
                 ML.Result result = BL.Usuario.Add(usuario);
@@ -145,6 +153,15 @@ namespace PL.Controllers
             ML.Result result = BL.Colonia.GetByIdMunicipio(IdMunicipio);
             return Json(result.Objects);
             //return Json(result.Objects, JsonRequestBehavior.AllowGet);
+        }
+        public static byte[] ConvertToBytes(IFormFile imagen)
+        {
+            using var fileStream = imagen.OpenReadStream();
+
+            byte[] bytes = new byte[fileStream.Length];
+            fileStream.Read(bytes, 0, (int)fileStream.Length);
+
+            return bytes;
         }
     }
 }

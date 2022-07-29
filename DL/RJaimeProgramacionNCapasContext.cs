@@ -202,6 +202,8 @@ namespace DL
 
                 entity.Property(e => e.FechaNacimiento).HasColumnType("date");
 
+                entity.Property(e => e.Imagen).IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);

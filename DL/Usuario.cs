@@ -24,14 +24,14 @@ namespace DL
         public string? Celular { get; set; }
         public DateTime? FechaNacimiento { get; set; }
         public string? Curp { get; set; }
-        public byte[]? Imagen { get; set; }
+        public string? Imagen { get; set; }
 
         public virtual Rol? IdRolNavigation { get; set; }
         public virtual ICollection<Aseguradora> Aseguradoras { get; set; }
         public virtual ICollection<Direccion> Direccions { get; set; }
 
         //Alias
-        
+
         public string NombreRol { get; set; }
         public string NombreColonia { get; set; }
         public string NombreMunicipio { get; set; }

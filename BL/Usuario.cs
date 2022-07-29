@@ -86,7 +86,7 @@ namespace BL
             {
                 using (DL.RJaimeProgramacionNCapasContext context = new DL.RJaimeProgramacionNCapasContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd '{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}','{usuario.Telefono}','{usuario.Rol.IdRol}','{usuario.UserName}','{usuario.Password}','{usuario.Sexo}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.CURP}','{usuario.Imagen}','{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}'',{usuario.Direccion.Colonia.IdColonia}'");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioAdd '{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}','{usuario.Telefono}','{usuario.Rol.IdRol}','{usuario.UserName}','{usuario.Password}','{usuario.Sexo}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.CURP}','{usuario.Imagen}','{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}',{usuario.Direccion.Colonia.IdColonia}");
                     if (query != null)
                     {
                         result.Correct = true;
@@ -140,7 +140,7 @@ namespace BL
             {
                 using (DL.RJaimeProgramacionNCapasContext context = new DL.RJaimeProgramacionNCapasContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioUpdate {usuario.IdUsuario} '{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}','{usuario.Telefono}','{usuario.Rol.IdRol}','{usuario.UserName}','{usuario.Password}','{usuario.Sexo}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.CURP}','{usuario.Imagen}','{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}'',{usuario.Direccion.Colonia.IdColonia}'");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioUpdate {usuario.IdUsuario},'{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}','{usuario.Telefono}',{usuario.Rol.IdRol},'{usuario.UserName}','{usuario.Password}','{usuario.Sexo}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.CURP}','{usuario.Imagen}',{usuario.Direccion.IdDireccion},'{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}',{usuario.Direccion.Colonia.IdColonia}");
                                         
                     if (query != null)
                     {
@@ -189,7 +189,7 @@ namespace BL
                         usuario.Celular = obj.Celular;
                         usuario.FechaNacimiento = obj.FechaNacimiento.Value.ToString("dd-MM-yyyy");
                         usuario.CURP = obj.Curp;
-                        usuario.Imagen = null;
+                        usuario.Imagen = obj.Imagen;
                         usuario.Direccion = new ML.Direccion();
                         usuario.Direccion.IdDireccion = obj.IdDireccion;
                         usuario.Direccion.Calle = obj.Calle;
