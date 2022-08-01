@@ -35,7 +35,8 @@ namespace PL.Controllers
             }
             ML.Aseguradora aseguradora = new ML.Aseguradora();
             aseguradora.Usuario = new ML.Usuario();
-            ML.Result resultUsuario = BL.Usuario.GetAll();
+            ML.Usuario usuario = new ML.Usuario();
+            ML.Result resultUsuario = BL.Usuario.GetAll(usuario);
 
             if (resultUsuario.Correct)
             {

@@ -8,7 +8,7 @@ namespace PL.Controllers
         public ActionResult GetAll()
         {
             ML.Usuario usuario = new ML.Usuario();
-            ML.Result result = BL.Usuario.GetAll();
+            ML.Result result = BL.Usuario.GetAll(usuario);
 
 
             if (result.Correct)
@@ -18,6 +18,23 @@ namespace PL.Controllers
             else
             {
                 ViewBag.Mensaje = "Ocurrio un error" + result.ErrorMessage;
+            }
+            return View(usuario);
+        }
+        [HttpPost]
+        public ActionResult GetAll(ML.Usuario usuario)
+        {
+            usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
+            usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
+            usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno;
+            ML.Result result = BL.Usuario.GetAll(usuario);
+            if (result.Correct)
+            {
+                usuario.Usuarios = result.Objects;
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un al llamar getall con datos" + result.ErrorMessage;
             }
             return View(usuario);
         }
@@ -159,6 +176,7 @@ namespace PL.Controllers
             }
             return View("Modal");
         }
+
 
         //jsons
         public JsonResult EstadoGetByIdPais(int IdPais)

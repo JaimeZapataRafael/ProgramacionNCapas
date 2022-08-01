@@ -5,14 +5,14 @@ namespace BL
 {
     public class Usuario
     {
-        public static ML.Result GetAll()
+        public static ML.Result GetAll(ML.Usuario usuarioBusquedaAbierta)
         {
             ML.Result result = new ML.Result();
             try
             {
                 using (DL.RJaimeProgramacionNCapasContext context = new DL.RJaimeProgramacionNCapasContext())
                 {
-                    var query = context.Usuarios.FromSqlRaw($"UsuarioGetAll").ToList();
+                    var query = context.Usuarios.FromSqlRaw($"UsuarioGetAll '{usuarioBusquedaAbierta.Nombre}','{usuarioBusquedaAbierta.ApellidoPaterno}','{usuarioBusquedaAbierta.ApellidoMaterno}'").ToList();
                     result.Objects = new List<object>();
 
                     if (query != null)

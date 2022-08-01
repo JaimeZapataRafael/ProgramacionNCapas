@@ -10,11 +10,40 @@
         <h5>Seleccione un alumno para editarlo o + para agregar...</h5>
         <hr />
     </div>
-
 </div>
 
+@using (Html.BeginForm("GetAll", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col">
+        <div class="col-md-4 col-12 col-sm-6">
+            @Html.LabelFor(model => model.Nombre)
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+        </div>
+    </div>
+    <div class="col">
+       <div class="col-md-4 col-12 col-sm-6">
+           @Html.LabelFor(model => model.ApellidoPaterno)
+           @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+       </div>
+   </div>
+   <div class="col">
+        <div class="col-md-4 col-12 col-sm-6">
+           @Html.LabelFor(model => model.ApellidoMaterno)
+           @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+        </div>
+   </div>
+
+     <div class="col">
+         <div class="col-md-3">
+             <input type="submit" value="Buscar"/>
+         </div>
+     </div>
+
+}
+
+
 @*<div class="row">*@
-<div style="float:left;">
+<div style="float:right;">
     @Html.ActionLink("+", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success" })
 
 </div>
