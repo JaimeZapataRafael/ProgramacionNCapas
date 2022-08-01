@@ -116,5 +116,16 @@ namespace PL.Controllers
             }
             return View("Modal");
         }
+
+        //JSONS
+        public static byte[] ConvertToBytes(IFormFile imagen)
+        {
+            using var fileStream = imagen.OpenReadStream();
+
+            byte[] bytes = new byte[fileStream.Length];
+            fileStream.Read(bytes, 0, (int)fileStream.Length);
+
+            return bytes;
+        }
     }
 }

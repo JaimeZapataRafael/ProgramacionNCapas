@@ -29,6 +29,7 @@
             <td>FechaCreacion</td>
             <td>FechaModificacion</td>
             @*<td>IdUsuario</td>*@
+            <td>Imagen</td>
             <td>Username</td>
             <td>Eliminar</td>
         </tr>
@@ -43,8 +44,18 @@
                 <td>@aseguradora.FechaCreacion</td>
                 <td>@aseguradora.FechaModificacion</td>
                 @*<td>@aseguradora.Usuario.IdUsuario</td>*@
+               
+                @if(aseguradora.Imagen == null || aseguradora.Imagen == "")
+                {
+                    <td><img id="Img" src="~/imagenes/imagenpredeterminada.jpg" style="width:auto ; height:100px" /></td>
+                }
+                else
+                {
+                   <td> <img id="Img" src="data:image/*;base64,@aseguradora.Imagen" style="width:auto ; height:100px" /></td> }
+                
                 <td>@aseguradora.Usuario.UserName</td>
                 <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Aseguradora", new { IdAseguradora = aseguradora.IdAseguradora})" onclick="return confirm('Estas seguro que deseas eliminar esta aseguradora?');"></a></td>
+
             </tr>
         }
 

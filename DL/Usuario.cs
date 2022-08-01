@@ -25,12 +25,13 @@ namespace DL
         public DateTime? FechaNacimiento { get; set; }
         public string? Curp { get; set; }
         public string? Imagen { get; set; }
+        public bool? Status { get; set; }
 
         public virtual Rol? IdRolNavigation { get; set; }
         public virtual ICollection<Aseguradora> Aseguradoras { get; set; }
         public virtual ICollection<Direccion> Direccions { get; set; }
 
-        //Alias
+        //Alias de usuario
 
         public string NombreRol { get; set; }
         public string NombreColonia { get; set; }
@@ -46,6 +47,5 @@ namespace DL
         public int IdMunicipio { get; set; }
         public int IdEstado { get; set; }
         public int IdPais { get; set; }
-
     }
 }

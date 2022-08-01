@@ -134,6 +134,32 @@ namespace PL.Controllers
             }
             return View("Modal");
         }
+        [HttpGet]
+        public ActionResult UpdateStatus(int IdUsuario)
+        {
+            ML.Usuario usuario = new ML.Usuario();
+            ML.Result result = BL.Usuario.GetById(IdUsuario);
+            if (result.Correct)
+            {
+                usuario = (ML.Usuario)result.Object;
+                usuario.Status = (usuario.Status) ? false : true;
+                ML.Result resultUpdate = BL.Usuario.Update(usuario);
+                if (resultUpdate.Correct)
+                {
+                    ViewBag.Mensaje = "Estatus Actualizado ";
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Ocurrio un Error al actualizar el status" + result.ErrorMessage;
+                }
+            }
+            else
+            {
+                ViewBag.Mensaje = "Ocurrio un Error al actualizar el status" + result.ErrorMessage;
+            }
+            return View("Modal");
+        }
+
         //jsons
         public JsonResult EstadoGetByIdPais(int IdPais)
         {

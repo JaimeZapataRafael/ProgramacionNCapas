@@ -36,6 +36,8 @@ namespace BL
                             usuario.Celular = obj.Celular;
                             usuario.FechaNacimiento = obj.FechaNacimiento.Value.ToString("dd-MM-yyyy");
                             usuario.CURP = obj.Curp;
+                            usuario.Imagen = obj.Imagen;
+                            usuario.Status =obj.Status.Value;
 
                             usuario.Direccion = new ML.Direccion();
                             usuario.Direccion.IdDireccion = obj.IdDireccion;
@@ -140,7 +142,7 @@ namespace BL
             {
                 using (DL.RJaimeProgramacionNCapasContext context = new DL.RJaimeProgramacionNCapasContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"UsuarioUpdate {usuario.IdUsuario},'{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}','{usuario.Telefono}',{usuario.Rol.IdRol},'{usuario.UserName}','{usuario.Password}','{usuario.Sexo}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.CURP}','{usuario.Imagen}',{usuario.Direccion.IdDireccion},'{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}',{usuario.Direccion.Colonia.IdColonia}");
+                    var query = context.Database.ExecuteSqlRaw($"UsuarioUpdate {usuario.IdUsuario},'{usuario.Nombre}','{usuario.ApellidoPaterno}','{usuario.ApellidoMaterno}','{usuario.Email}','{usuario.Telefono}',{usuario.Rol.IdRol},'{usuario.UserName}','{usuario.Password}','{usuario.Sexo}','{usuario.Celular}','{usuario.FechaNacimiento}','{usuario.CURP}','{usuario.Imagen}',{usuario.Status},{usuario.Direccion.IdDireccion},'{usuario.Direccion.Calle}','{usuario.Direccion.NumeroInterior}','{usuario.Direccion.NumeroExterior}',{usuario.Direccion.Colonia.IdColonia}");
                                         
                     if (query != null)
                     {
@@ -181,7 +183,7 @@ namespace BL
                         usuario.Email = obj.Email;
                         usuario.Telefono = obj.Telefono;
                         usuario.Rol = new ML.Rol();
-
+                        usuario.Rol.IdRol = obj.IdRol.Value;
                         usuario.Rol.Nombre = obj.NombreRol;
                         usuario.UserName = obj.UserName;
                         usuario.Password = obj.Password;
@@ -190,6 +192,7 @@ namespace BL
                         usuario.FechaNacimiento = obj.FechaNacimiento.Value.ToString("dd-MM-yyyy");
                         usuario.CURP = obj.Curp;
                         usuario.Imagen = obj.Imagen;
+                        usuario.Status = obj.Status.Value;
                         usuario.Direccion = new ML.Direccion();
                         usuario.Direccion.IdDireccion = obj.IdDireccion;
                         usuario.Direccion.Calle = obj.Calle;

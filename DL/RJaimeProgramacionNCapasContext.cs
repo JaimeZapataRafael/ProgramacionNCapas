@@ -49,6 +49,8 @@ namespace DL
 
                 entity.Property(e => e.FechaModificacion).HasColumnType("datetime");
 
+                entity.Property(e => e.Imagen).IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(50)
                     .IsUnicode(false);

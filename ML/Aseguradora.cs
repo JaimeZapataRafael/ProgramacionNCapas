@@ -13,6 +13,8 @@ namespace ML
         public string? FechaCreacion { get; set; }
         public string? FechaModificacion { get; set; }
         public ML.Usuario? Usuario { get; set; }
+        public string Imagen { get; set; }
         public List<object>? Aseguradoras { get; set; }
+
     }
 }

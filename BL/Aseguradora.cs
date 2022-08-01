@@ -11,7 +11,7 @@ namespace BL
             {
                 using (DL.RJaimeProgramacionNCapasContext context = new DL.RJaimeProgramacionNCapasContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"AseguradoraAdd'{aseguradora.Nombre}',{aseguradora.Usuario.IdUsuario}");
+                    var query = context.Database.ExecuteSqlRaw($"AseguradoraAdd'{aseguradora.Nombre}',{aseguradora.Usuario.IdUsuario},'{aseguradora.Imagen}'");
                     if (query > 0)
                     {
                         result.Correct = true;
@@ -60,7 +60,7 @@ namespace BL
             {
                 using (DL.RJaimeProgramacionNCapasContext context = new DL.RJaimeProgramacionNCapasContext())
                 {
-                    var query = context.Database.ExecuteSqlRaw($"AseguradoraUpdate {aseguradora.IdAseguradora},'{aseguradora.Nombre}',{aseguradora.Usuario.IdUsuario}");
+                    var query = context.Database.ExecuteSqlRaw($"AseguradoraUpdate {aseguradora.IdAseguradora},'{aseguradora.Nombre}',{aseguradora.Usuario.IdUsuario},'{aseguradora.Imagen}'");
                     if (query >= 1)
                     {
                         result.Correct = true;
@@ -100,6 +100,7 @@ namespace BL
                             aseguradora.FechaModificacion = obj.FechaModificacion.ToString();
                             aseguradora.Usuario = new ML.Usuario();
                             aseguradora.Usuario.IdUsuario = obj.IdUsuario.Value;
+                            aseguradora.Imagen = obj.Imagen;
                             aseguradora.Usuario.UserName = obj.UserName;
                             result.Objects.Add(aseguradora);
 
@@ -141,6 +142,7 @@ namespace BL
                         aseguradora.FechaModificacion = obj.FechaModificacion.ToString();
                         aseguradora.Usuario = new ML.Usuario();
                         aseguradora.Usuario.IdUsuario = obj.IdUsuario.Value;
+                        aseguradora.Imagen = obj.Imagen;
                         aseguradora.Usuario.UserName = obj.UserName;
 
                         result.Object = aseguradora;

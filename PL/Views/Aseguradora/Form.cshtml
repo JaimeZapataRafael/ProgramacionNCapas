@@ -64,11 +64,32 @@
                 <div class="col">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.Usuario.IdUsuario)
-@*                        @Html.TextBoxFor(model => model.Usuario.IdUsuario, new { @class = "form-control", @id = "txtIdUsuario" })
-*@                      @Html.DropDownListFor(model => model.Usuario.IdUsuario, new SelectList(Model.Usuario.Usuarios, "IdUsuario", "UserName"), "Selecciona un UserName", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.Usuario.IdUsuario, new SelectList(Model.Usuario.Usuarios, "IdUsuario", "UserName"), "Selecciona un UserName", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Usuario.IdUsuario)
                     </div>
                 </div>
+
+                <div class="col-md-4">
+
+                        @Html.LabelFor(model=> model.Imagen)
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                            <input type='file' class="form-control" name="fuImage" onchange="readURL(this);" />
+                        </div>
+
+                        @if (Model.Imagen != null)
+                        {
+
+                            <img id="Img" src="data:image/*;base64,Model.Imagen" style="width:auto ; height:100px" />
+
+                        }
+                        else
+                        {
+                            <img id="Img" src="~/imagenes/imagenpredeterminada.jpg" style="width:auto ; height:100px" />
+                        }
+                </div>
+                    @Html.HiddenFor(model => model.Imagen)
 
                 <div class="col">
                     <div class="col-md-3">
@@ -82,4 +103,20 @@
         </div>
     </div>
 </div>
+@section Scripts
+{
+<script>
+    k
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#Img')
+            .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+}
 
