@@ -1,0 +1,83 @@
+﻿@model  ML.Empresa
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Empresa</h2>
+            <h5>Ingrese los datos de la Empresa:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Empresa", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.IdEmpresa)
+                        @Html.TextBoxFor(model => model.IdEmpresa, new { @class = "form-control", @id = "txtIdEmpresa" })
+                        @Html.ValidationMessageFor(model => model.IdEmpresa)
+                    </div>
+                </div>
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre"})
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+                </div>
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Telefono)
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono"})
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </div>
+                </div>
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail"})
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.DireccionWeb)
+                        @Html.TextBoxFor(model => model.DireccionWeb, new { @class = "form-control", @id = "txtDireccionWeb"})
+                        @Html.ValidationMessageFor(model => model.DireccionWeb)
+                    </div>
+                </div>
+                 <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Logo)
+                        @Html.TextBoxFor(model => model.Logo, new { @class = "form-control", @id = "txtLogo"})
+                        @Html.ValidationMessageFor(model => model.Logo)
+                    </div>
+                </div>
+               
+               
+                <div class="col">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Empresa", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>

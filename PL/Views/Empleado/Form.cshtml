@@ -1,0 +1,164 @@
+﻿@model  ML.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Empleado</h2>
+            <h5>Ingrese los datos del Empleado:</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @*Crea un salto de linea*@
+            <hr />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="hidden">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.NumeroEmpleado)
+                        @Html.TextBoxFor(model => model.NumeroEmpleado, new { @class = "form-control", @id = "txtNumeroEmpleado" })
+                        @Html.ValidationMessageFor(model => model.NumeroEmpleado)
+
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => Model.Action)
+               
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.RFC)
+                        @Html.TextBoxFor(model => model.RFC, new { @class = "form-control", @id = "txtRFC" })
+                        @Html.ValidationMessageFor(model => model.RFC)
+
+                    </div>
+                </div>  
+                 <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.ApellidoPaterno)
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+                        @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                    </div>
+                </div> 
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.ApellidoMaterno)
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+                        @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                    </div>
+                </div> 
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div> 
+                 <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Telefono)
+                        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" })
+                        @Html.ValidationMessageFor(model => model.Telefono)
+                    </div>
+                </div>
+                 <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.FechaNacimiento)
+                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento" })
+                        @Html.ValidationMessageFor(model => model.FechaNacimiento)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.NSS)
+                        @Html.TextBoxFor(model => model.NSS, new { @class = "form-control", @id = "txtNSS" })
+                        @Html.ValidationMessageFor(model => model.NSS)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.FechaIngreso)
+                        @Html.TextBoxFor(model => model.FechaIngreso, new { @class = "form-control", @id = "txtFechaIngreso" })
+                        @Html.ValidationMessageFor(model => model.FechaIngreso)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Empresa)
+                        @Html.DropDownListFor(model => model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Selecciona una Empresa", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Empresa)
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                        @Html.LabelFor(model=> model.Foto)
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                            <input type='file' class="form-control" name="fuImage" onchange="readURL(this);" />
+                        </div>
+
+                        @if (Model.Foto != null)
+                        {
+
+                            <img id="Img" src="data:image/*;base64,Model.Imagen" style="width:auto ; height:100px" />
+
+                        }
+                        else
+                        {
+                            <img id="Img" src="~/imagenes/imagenpredeterminada.jpg" style="width:auto ; height:100px" />
+                        }
+                </div>
+                @Html.HiddenFor(model => model.Foto)
+
+                
+
+
+                <div class="col">
+                    <div class="col-md-3">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                        @Html.ActionLink("Regresar", "GetAll", "Empleado", htmlAttributes: new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+<script>
+    
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#Img')
+                  .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+}
+

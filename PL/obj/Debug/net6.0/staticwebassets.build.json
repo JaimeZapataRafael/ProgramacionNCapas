@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rjU7ShzcaJN09sjycqDuosQZMjofLJkTkD+0SDre5/4=",
+  "Hash": "Yb8ydzwjOXviz4i6io3fGQ+WDmplo3FiX8qq3uY2olE=",
   "Source": "PL",
   "BasePath": "_content/PL",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\digis\\Documents\\RafaelJaime\\RJaimeProgramacionNCapasNetCore\\PL\\wwwroot\\Files\\logErrores.txt",
+      "SourceId": "PL",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\digis\\Documents\\RafaelJaime\\RJaimeProgramacionNCapasNetCore\\PL\\wwwroot\\",
+      "BasePath": "_content/PL",
+      "RelativePath": "Files/logErrores.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Files\\logErrores.txt"
     },
     {
       "Identity": "C:\\Users\\digis\\Documents\\RafaelJaime\\RJaimeProgramacionNCapasNetCore\\PL\\wwwroot\\imagenes\\imagenpredeterminada.jpg",

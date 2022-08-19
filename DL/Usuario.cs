@@ -33,6 +33,7 @@ namespace DL
 
         //Alias de usuario
 
+        public string NombreEmpresa { get; set; }
         public string NombreRol { get; set; }
         public string NombreColonia { get; set; }
         public string NombreMunicipio { get; set; }

@@ -31,12 +31,60 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNlZ3VyYWRvcmFcTW9kYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/CargaMasiva/CargaMasivaEmpresa.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyZ2FNYXNpdmFcQ2FyZ2FNYXNpdmFFbXByZXNhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/CargaMasiva/Modal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyZ2FNYXNpdmFcTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Dependiente/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwZW5kaWVudGVcR2V0QWxsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Dependiente/GetByIdEmpleado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwZW5kaWVudGVcR2V0QnlJZEVtcGxlYWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Dependiente/Modal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwZW5kaWVudGVcTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Empleado/Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbGVhZG9cRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Empleado/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbGVhZG9cR2V0QWxsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Empleado/Modal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbGVhZG9cTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Empresa/Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYVxGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Empresa/GetAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYVxHZXRBbGwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Empresa/Modal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYVxNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Login/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/digis/Documents/RafaelJaime/RJaimeProgramacionNCapasNetCore/PL/Views/Shared/Error.cshtml]

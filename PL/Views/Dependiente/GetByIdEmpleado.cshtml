@@ -1,0 +1,64 @@
+﻿@model ML.Dependiente
+@{
+    ViewBag.Title = "GetByIdEmpleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dependiente</h2>
+
+
+@using (Html.BeginForm("GetAll", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+   
+    <div class="col">
+        <div class="col-md-4 col-12 col-sm-6">
+            @Html.LabelFor(model => model.Nombre)
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+        </div>
+    </div>
+    <div class="col">
+       <div class="col-md-4 col-12 col-sm-6">
+           @Html.LabelFor(model => model.ApellidoPaterno)
+           @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+       </div>
+   </div>
+
+   <div class="col">
+        <div class="col-md-4 col-12 col-sm-6">
+           @Html.LabelFor(model => model.ApellidoMaterno)
+           @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+        </div>
+   </div>
+ 
+   <div class="col">      
+      <div class="col-md-3">
+          <input type="submit" value="Buscar"/>
+      </div>
+  </div>
+     
+}
+
+<br>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Asignar</td>            
+            <td>Nombre</td>            
+            <td>Empresa</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Dependiente dependiente in Model.Dependientes)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("GetByIdEmpleado", "Dependiente", new { NumeroEmpleado = dependiente.Empleado.NumeroEmpleado })"></a></td>
+                <td>@dependiente.Nombre</td>
+                <td>@dependiente.ApellidoPaterno</td>  
+                
+            </tr>
+        }
+
+    </tbody>
+</table>

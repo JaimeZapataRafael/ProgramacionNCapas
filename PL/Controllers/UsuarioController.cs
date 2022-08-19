@@ -1,9 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace PL.Controllers
 {
     public class UsuarioController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public UsuarioController(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        {
+            _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
+        }
+
+
         [HttpGet]// GET: Usuario / action verb
         public ActionResult GetAll()
         {
@@ -28,14 +40,36 @@ namespace PL.Controllers
             usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
             usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno;
             ML.Result result = BL.Usuario.GetAll(usuario);
+            //ML.Result resultApi = new ML.Result();
+
+            //using (var client = new HttpClient())
+            //{
+            //    client.BaseAddress = new Uri(_configuration["WebApi"]);
+            //    var responseTask = client.GetAsync("api/Usuario/GetAll");
+            //    responseTask.Wait();
+
+            //    var result = responseTask.Result;
             if (result.Correct)
             {
                 usuario.Usuarios = result.Objects;
-            }
+                    //var readTask = result.Content.ReadAsAsync<ML.Result>();
+                    //readTask.Wait();
+
+                    //resultApi.Objects = new List<object>();
+                    
+                    //foreach (var resultItem in readTask.Result.Objects)
+                    //{
+                    //    ML.Usuario resultUsuario = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Usuario>(resultItem.ToString());
+                    //    resultApi.Objects.Add(resultUsuario);
+                    //}
+                }
+            //}
             else
             {
-                ViewBag.Mensaje = "Ocurrio un al llamar getall con datos" + result.ErrorMessage;
+                result.Correct = false;
             }
+
+            //usuario.Usuarios = resultApi.Objects;
             return View(usuario);
         }
         [HttpGet]
@@ -67,11 +101,31 @@ namespace PL.Controllers
                 }
                 else
                 {
-                    ML.Result result = BL.Usuario.GetById(IdUsuario.Value);
-                    if (result.Correct)
-                    {
+                    //ML.Result result = BL.Usuario.GetById(IdUsuario.Value);
+                    ML.Result resultApi = new ML.Result();
 
-                        usuario = (ML.Usuario)result.Object;
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(_configuration["WebApi"]);
+                        var responseTask = client.GetAsync("api/Usuario/GetById?IdUsuario="+IdUsuario);
+                        responseTask.Wait();
+
+                        var result = responseTask.Result;
+
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var readTask = result.Content.ReadAsAsync<ML.Result>();
+                            readTask.Wait();
+
+                            var resultItem = readTask.Result.Object;
+                            
+                            ML.Usuario resultUsuario = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Usuario>(resultItem.ToString());
+                            resultApi.Object = resultUsuario;
+                        }
+                    }
+
+                        usuario = (ML.Usuario)resultApi.Object;
+
                         ML.Result resultEstado = BL.Estado.EstadoGetByIdPais(usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais);
                         ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
                         ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
@@ -82,12 +136,7 @@ namespace PL.Controllers
                         usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPais.Objects;
 
                         return View(usuario);
-                    }
-                    else
-                    {
-
-                        return View("Modal");
-                    }
+                    
                 }
 
             }
@@ -102,52 +151,99 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult Form(ML.Usuario usuario)
         {
-            IFormFile imagen = Request.Form.Files["fuImage"];
-            if (imagen != null)
+            if (ModelState.IsValid)            
             {
-                byte[] ImagenByte = ConvertToBytes(imagen);
-                usuario.Imagen = Convert.ToBase64String(ImagenByte);
-
-            }
-
-            if (usuario.IdUsuario == 0)
-            {
-                ML.Result result = BL.Usuario.Add(usuario);
-                if (result.Correct)
+                IFormFile imagen = Request.Form.Files["fuImage"];
+                if (imagen != null)
                 {
-                    ViewBag.Mensaje = "Registro Exitoso";
+                    byte[] ImagenByte = ConvertToBytes(imagen);
+                    usuario.Imagen = Convert.ToBase64String(ImagenByte);
+
                 }
+
+                if (usuario.IdUsuario == 0)
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(_configuration["WebApi"]);
+                        var postTask = client.PostAsJsonAsync<ML.Usuario>("api/Usuario/Add",usuario);
+                        postTask.Wait();
+
+                        var resultService = postTask.Result;
+
+                        //ML.Result result = BL.Usuario.Add(usuario);
+
+                        if (resultService.IsSuccessStatusCode)
+                        {
+                            ViewBag.Mensaje = "Registro Exitoso";
+                        }
+                        else
+                        {
+                            ViewBag.Mensaje = "Ocurrio un Error";
+                        }
+                        return View("Modal");
+                    }
+                }
+
                 else
                 {
-                    ViewBag.Mensaje = "Ocurrio un Error" + result.ErrorMessage;
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(_configuration["WebApi"]);
+                        var postTask = client.PostAsJsonAsync<ML.Usuario>("api/Usuario/Update", usuario);
+                        postTask.Wait();
+
+                        var resultService = postTask.Result;
+
+                        //ML.Result result = BL.Usuario.Update(usuario);
+                        if (resultService.IsSuccessStatusCode)
+                        {
+                            ViewBag.Mensaje = "Registro Actualizado";
+                        }
+                        else
+                        {
+                            ViewBag.Mensaje = "Ocurrio un Error";
+                        }
+                    }
+                    return View("Modal");
                 }
-                return View("Modal");
             }
             else
             {
-                ML.Result result = BL.Usuario.Update(usuario);
-                if (result.Correct)
-                {
-                    ViewBag.Mensaje = "Registro Actualizado";
-                }
-                else
-                {
-                    ViewBag.Mensaje = "Ocurrio un Error" + result.ErrorMessage;
-                }
-                return View("Modal");
+                ML.Result resultRol = BL.Rol.GetAll();
+                ML.Result resultPais = BL.Pais.GetAll();
+                ML.Result resultEstado = BL.Estado.EstadoGetByIdPais(usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais);
+                ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
+                ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
+                usuario.Rol.Roles = resultRol.Objects;
+                usuario.Direccion.Colonia.Colonias = resultColonia.Objects;
+                usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipio.Objects;
+                usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstado.Objects;
+                usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPais.Objects;
+                return View(usuario);
             }
+
         }
         [HttpGet]
-        public ActionResult Delete(ML.Usuario usuario)
+        public ActionResult Delete(int IdUsuario)
         {
-            ML.Result result = BL.Usuario.Delete(usuario);
-            if (result.Correct)
+            //ML.Result result = BL.Usuario.Delete(usuario);
+            using (var client = new HttpClient())
             {
-                ViewBag.Mensaje = "Registro Eliminado";
-            }
-            else
-            {
-                ViewBag.Mensaje = "Ocurrio un Error" + result.ErrorMessage;
+                client.BaseAddress = new Uri(_configuration["WebApi"]);
+                var responseTask = client.DeleteAsync("api/Usuario/Delete/?IdUsuario=" + IdUsuario);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    ViewBag.Mensaje = "Registro Eliminado";
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Ocurrio un Error";
+                }
             }
             return View("Modal");
         }

@@ -1,0 +1,115 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Empleado</h2>
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un Empleado para editarlo o + para agregar...</h5>
+        <hr />
+    </div>
+</div>
+
+
+@using (Html.BeginForm("GetAll", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+   
+    <div class="col">
+        <div class="col-md-4 col-12 col-sm-6">
+            @Html.LabelFor(model => model.Nombre)
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+        </div>
+    </div>
+    <div class="col">
+       <div class="col-md-4 col-12 col-sm-6">
+           @Html.LabelFor(model => model.ApellidoPaterno)
+           @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
+       </div>
+   </div>
+
+   <div class="col">
+        <div class="col-md-4 col-12 col-sm-6">
+           @Html.LabelFor(model => model.ApellidoMaterno)
+           @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+        </div>
+   </div>
+
+   <div class="col">        
+       <div class="col-md-4 col-12 col-sm-6">            
+            @Html.LabelFor(model => model.Empresa)
+            @*@Html.DropDownListFor(model => model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Selecciona una Empresa", new { @class = "form-control" })*@
+            @Html.TextBoxFor(model => model.Empresa.IdEmpresa, new { @class = "form-control", @id = "txtIdEmpresa" })
+       </div>
+   </div>   
+ 
+   <div class="col">      
+      <div class="col-md-3">
+          <input type="submit" value="Buscar"/>
+      </div>
+  </div>
+     
+}
+
+@*<div class="row">*@
+<div style="float:right;">
+    @Html.ActionLink("+", "Form", "Empelado", htmlAttributes: new { @class = "btn btn-success" })
+
+</div>
+
+<br>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Editar</td>
+            <td>Asignar Dependiete</td>
+            <td class="hidden">NumeroEmpleado</td>
+            <td>RFC</td>
+            <td>Nombre</td>
+            <td>ApellidoPaterno</td>
+            <td>ApellidoMaterno</td>
+            <td>Email</td>
+            <td>Telefono</td>
+            <td>FechaNacimiento</td>
+            <td>NSS</td>
+            <td>FechaIngreso</td>
+            <td>Foto</td>
+            <td>Empresa</td>
+            <td>Eliminar</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Empleado empleado in Model.Empleados)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Empleado", new { NumeroEmpleado = empleado.NumeroEmpleado })"></a></td>
+                <td class="hidden">@empleado.NumeroEmpleado</td>
+                <td>@empleado.RFC</td>
+                <td>@empleado.Nombre </td>
+                <td>@empleado.ApellidoPaterno</td>
+                <td>@empleado.ApellidoMaterno</td>
+                <td>@empleado.Email</td>
+                <td>@empleado.Telefono</td>
+                <td>@empleado.FechaNacimiento</td>
+                <td>@empleado.NSS</td>
+                <td>@empleado.FechaIngreso</td>
+                 @if(empleado.Foto == null || empleado.Foto == "")
+                {
+                    <td><img id="Img" src="~/imagenes/imagenpredeterminada.jpg" style="width:auto ; height:100px" /></td>
+                }
+                else
+                {
+                    
+                    <td> <img id="Img" src="data:image/*;base64,@empleado.Foto" style="width:auto ; height:100px" /></td>
+                }  
+                <td>@empleado.Empresa.Nombre</td>  
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Empleado", new { NumeroEmpleado = empleado.NumeroEmpleado})" onclick="return confirm('Estas seguro que deseas eliminar este empleado?');"></a></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>

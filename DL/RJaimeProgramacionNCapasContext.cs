@@ -18,7 +18,12 @@ namespace DL
 
         public virtual DbSet<Aseguradora> Aseguradoras { get; set; } = null!;
         public virtual DbSet<Colonium> Colonia { get; set; } = null!;
+        public virtual DbSet<Dependiente> Dependientes { get; set; } = null!;
+        public virtual DbSet<DependienteTipo> DependienteTipos { get; set; } = null!;
         public virtual DbSet<Direccion> Direccions { get; set; } = null!;
+        public virtual DbSet<Empleado> Empleados { get; set; } = null!;
+        public virtual DbSet<EmpleadoBulk> EmpleadoBulks { get; set; } = null!;
+        public virtual DbSet<Empresa> Empresas { get; set; } = null!;
         public virtual DbSet<Estado> Estados { get; set; } = null!;
         public virtual DbSet<Municipio> Municipios { get; set; } = null!;
         public virtual DbSet<Pai> Pais { get; set; } = null!;
@@ -30,7 +35,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=LAPTOP-2PSCNMSB; Database= RJaimeProgramacionNCapas; Trusted_Connection=True; User ID=sa; Password=pass@word1;");
+                optionsBuilder.UseSqlServer("Server=LAPTOP-2PSCNMSB; Database= RJaimeProgramacionNCapas;Trusted_Connection=True; User ID=sa; Password=pass@word1;");
             }
         }
 
@@ -80,6 +85,72 @@ namespace DL
                     .HasConstraintName("FK__Colonia__IdMunic__3F466844");
             });
 
+            modelBuilder.Entity<Dependiente>(entity =>
+            {
+                entity.HasKey(e => e.IdDependiente)
+                    .HasName("PK__Dependie__366D077195C1900F");
+
+                entity.ToTable("Dependiente");
+
+                entity.Property(e => e.ApellidoMaterno)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApellidoPaterno)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EstadoCivil)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaNacimiento).HasColumnType("date");
+
+                entity.Property(e => e.Genero)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumeroEmpleado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Rfc)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("RFC");
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdDependienteTipoNavigation)
+                    .WithMany(p => p.Dependientes)
+                    .HasForeignKey(d => d.IdDependienteTipo)
+                    .HasConstraintName("FK__Dependien__IdDep__1332DBDC");
+
+                entity.HasOne(d => d.NumeroEmpleadoNavigation)
+                    .WithMany(p => p.Dependientes)
+                    .HasForeignKey(d => d.NumeroEmpleado)
+                    .HasConstraintName("FK__Dependien__Numer__151B244E");
+            });
+
+            modelBuilder.Entity<DependienteTipo>(entity =>
+            {
+                entity.HasKey(e => e.IdDependienteTipo)
+                    .HasName("PK__Dependie__2C220C62BD0C7726");
+
+                entity.ToTable("DependienteTipo");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Direccion>(entity =>
             {
                 entity.HasKey(e => e.IdDireccion)
@@ -108,6 +179,143 @@ namespace DL
                     .WithMany(p => p.Direccions)
                     .HasForeignKey(d => d.IdUsuario)
                     .HasConstraintName("FK__Direccion__IdUsu__4316F928");
+            });
+
+            modelBuilder.Entity<Empleado>(entity =>
+            {
+                entity.HasKey(e => e.NumeroEmpleado)
+                    .HasName("PK__Empleado__44F848FCA4698459");
+
+                entity.ToTable("Empleado");
+
+                entity.HasIndex(e => e.Email, "UQ__Empleado__A9D1053441245804")
+                    .IsUnique();
+
+                entity.Property(e => e.NumeroEmpleado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApellidoMaterno)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApellidoPaterno)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(254)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaIngreso).HasColumnType("date");
+
+                entity.Property(e => e.FechaNacimiento).HasColumnType("date");
+
+                entity.Property(e => e.Foto).IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nss)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("NSS");
+
+                entity.Property(e => e.Rfc)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("RFC");
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdEmpresaNavigation)
+                    .WithMany(p => p.Empleados)
+                    .HasForeignKey(d => d.IdEmpresa)
+                    .HasConstraintName("FK__Empleado__IdEmpr__73BA3083");
+            });
+
+            modelBuilder.Entity<EmpleadoBulk>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("EmpleadoBulk");
+
+                entity.Property(e => e.ApellidoMaterno)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ApellidoPaterno)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(254)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaIngreso)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaNacimiento)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Foto).IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nss)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("NSS");
+
+                entity.Property(e => e.NumeroEmpleado)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Rfc)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("RFC");
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Empresa>(entity =>
+            {
+                entity.HasKey(e => e.IdEmpresa)
+                    .HasName("PK__Empresa__5EF4033E6F1A5254");
+
+                entity.ToTable("Empresa");
+
+                entity.HasIndex(e => e.Email, "UQ__Empresa__161CF724D27F65F0")
+                    .IsUnique();
+
+                entity.Property(e => e.DireccionWeb)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(254)
+                    .IsUnicode(false)
+                    .HasColumnName("EMAIL");
+
+                entity.Property(e => e.Logo).IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Telefono)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Estado>(entity =>

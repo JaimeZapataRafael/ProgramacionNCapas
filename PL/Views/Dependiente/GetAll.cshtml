@@ -1,0 +1,56 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Empleado</h2>
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un Empleado para asignar dependientes</h5>
+        <hr />
+    </div>
+</div>
+
+
+@using (Html.BeginForm("GetAll", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+   <div class="col">        
+       <div class="col-md-4 col-12 col-sm-6">            
+            @Html.LabelFor(model => model.Empresa)
+            @*@Html.DropDownListFor(model => model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Selecciona una Empresa", new { @class = "form-control" })*@
+            @Html.TextBoxFor(model => model.Empresa.IdEmpresa, new { @class = "form-control", @id = "txtIdEmpresa" })
+       </div>
+   </div>   
+ 
+   <div class="col">      
+      <div class="col-md-3">
+          <input type="submit" value="Buscar"/>
+      </div>
+  </div>
+     
+}
+
+<br>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <td>Editar</td>            
+            <td>Nombre</td>            
+            <td>Empresa</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Empleado empleado in Model.Empleados)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("GetByIdEmpleado", "Dependiente", new { NumeroEmpleado = empleado.NumeroEmpleado })"></a></td>
+                <td>@empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno </td>
+                <td>@empleado.Empresa.Nombre</td>  
+                
+            </tr>
+        }
+
+    </tbody>
+</table>
