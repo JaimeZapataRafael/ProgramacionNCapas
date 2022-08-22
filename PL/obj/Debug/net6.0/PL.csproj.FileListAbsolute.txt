@@ -1,11 +1,10 @@
+C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.dll
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\appsettings.json
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.staticwebassets.runtime.json
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.exe
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.deps.json
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.runtimeconfig.json
-C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.dll
-C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.pdb
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\Humanizer.dll
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\System.Net.Http.Formatting.dll
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -80,4 +79,5 @@ C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\obj\Debu
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\obj\Debug\net6.0\refint\PL.dll
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\obj\Debug\net6.0\PL.pdb
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\obj\Debug\net6.0\PL.genruntimeconfig.cache
+C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\bin\Debug\net6.0\PL.pdb
 C:\Users\digis\Documents\RafaelJaime\RJaimeProgramacionNCapasNetCore\PL\obj\Debug\net6.0\ref\PL.dll

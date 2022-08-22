@@ -11,52 +11,68 @@
 {
 
    
-    <div class="col">
-        <div class="col-md-4 col-12 col-sm-6">
-            @Html.LabelFor(model => model.Nombre)
-            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
-        </div>
-    </div>
-    <div class="col">
-       <div class="col-md-4 col-12 col-sm-6">
-           @Html.LabelFor(model => model.ApellidoPaterno)
-           @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno" })
-       </div>
-   </div>
+<div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.Nombre)
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre"})
 
-   <div class="col">
-        <div class="col-md-4 col-12 col-sm-6">
-           @Html.LabelFor(model => model.ApellidoMaterno)
-           @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
-        </div>
-   </div>
- 
-   <div class="col">      
-      <div class="col-md-3">
-          <input type="submit" value="Buscar"/>
-      </div>
-  </div>
+                    </div>
+                </div>
+
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.ApellidoPaterno)
+                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno"})
+
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4 col-12 col-sm-6">
+                        @Html.LabelFor(model => model.ApellidoMaterno)
+                        @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno" })
+
+                    </div>
+                </div>
+
      
 }
 
 <br>
+<div style="float:right;">
+    @Html.ActionLink("+", "Form", "Dependiente", htmlAttributes: new { @class = "btn btn-success" })
+
+</div>
 
 <table class="table table-bordered table-responsive">
     <thead>
         <tr>
             <td>Asignar</td>            
             <td>Nombre</td>            
-            <td>Empresa</td>
+            <td>Fecha de Nacimiento</td>
+            <td>Estado Civil</td>
+            <td>Genero</td>  
+            <td>Telefono</td>  
+            <td>Rfc</td>  
+            <td>Eliminar</td>  
+            
         </tr>
     </thead>
     <tbody>
         @foreach (ML.Dependiente dependiente in Model.Dependientes)
         {
             <tr>
-                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("GetByIdEmpleado", "Dependiente", new { NumeroEmpleado = dependiente.Empleado.NumeroEmpleado })"></a></td>
-                <td>@dependiente.Nombre</td>
-                <td>@dependiente.ApellidoPaterno</td>  
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Dependiente", new { IdDependiente = dependiente.IdDependiente })"></a></td>
+                <td>@dependiente.Nombre @dependiente.ApellidoPaterno @dependiente.ApellidoMaterno</td>
+                <td>@dependiente.FechaNacimiento</td>  
+                <td>@dependiente.EstadoCivil</td> 
+                <td>@dependiente.Genero</td>  
+                <td>@dependiente.Telefono</td> 
+                <td>@dependiente.RFC</td>  
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Dependiente", new { IdDependiente = dependiente.IdDependiente})" onclick="return confirm('Estas seguro que deseas eliminar este Dependiente?');"></a></td>
                 
+
             </tr>
         }
 

@@ -10,5 +10,6 @@ namespace ML
     {
         public int IdDependienteTipo { get; set; }
         public string Nombre { get; set; }
+        public List<object>? DependientesTipo { get; set; }
     }
 }
