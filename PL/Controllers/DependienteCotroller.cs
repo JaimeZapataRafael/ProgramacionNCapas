@@ -11,6 +11,10 @@ namespace PL.Controllers
 
             empleado.Empresa = new ML.Empresa();
             ML.Result resultEmpresas = BL.Empresa.GetAll();
+
+            ML.Result resultDependienteTipo = BL.DependienteTipo.GetAll();
+            //empleado.Empresa.Empresas = resultEmpresas.Objects;
+
             ML.Result result = BL.Empleado.GetAll(empleado);
             if (result.Correct)
             {
@@ -33,6 +37,9 @@ namespace PL.Controllers
             empleado.Empresa.IdEmpresa = (empleado.Empresa.IdEmpresa == null) ? 0 : empleado.Empresa.IdEmpresa;
 
             ML.Result result = BL.Empleado.GetAll(empleado);
+            ML.Result resultEmpresas = BL.Empresa.GetAll();
+            empleado.Empresa.Empresas = resultEmpresas.Objects;
+
             if (result.Correct)
             {
                 empleado.Empleados = result.Objects;
@@ -56,21 +63,15 @@ namespace PL.Controllers
             ML.Dependiente dependiente = new ML.Dependiente();
             ML.Result resultDependientes = BL.Dependientes.GetByIdEmpleado(NumeroEmpleado);
             ML.Result resultEmpleado = BL.Empleado.GetById(NumeroEmpleado);
+            ML.Result resultEmpresas = BL.Empresa.GetAll();
+
+            dependiente.Empleado = (ML.Empleado)resultEmpleado.Object;
+
             if (resultDependientes.Correct)
             {
                 HttpContext.Session.SetString("NumeroEmpleado",NumeroEmpleado);
                 dependiente.Dependientes = new List<object>();
                 dependiente.Dependientes = resultDependientes.Objects;
-
-                //dependiente.Empleado = resultEmpleado.Object;
-                //dependiente.Empleado.ApellidoPaterno = empleado.ApellidoPaterno;
-                //dependiente.Empleado.ApellidoMaterno = empleado.ApellidoMaterno;
-
-                //aseguradora = (ML.Aseguradora)result.Object;
-
-
-                //aseguradora.Usuario = new ML.Usuario();
-                //aseguradora.Usuario.Usuarios = resultUsuario.Objects; 
 
                 return View(dependiente);
 
@@ -86,6 +87,8 @@ namespace PL.Controllers
         {
             ML.Dependiente dependiente = new ML.Dependiente();
             ML.Result resultDependienteTipo = BL.DependienteTipo.GetAll();
+            dependiente.DependienteTipo = new ML.DependienteTipo();
+            dependiente.DependienteTipo.DependientesTipo = resultDependienteTipo.Objects;
 
             if (resultDependienteTipo.Correct)
             {
@@ -93,8 +96,7 @@ namespace PL.Controllers
                 {
                     dependiente.Empleado = new ML.Empleado();
                     dependiente.Empleado.NumeroEmpleado = HttpContext.Session.GetString("NumeroEmpleado").ToString();
-                    dependiente.DependienteTipo = new ML.DependienteTipo();
-                    dependiente.DependienteTipo.DependientesTipo = resultDependienteTipo.Objects;
+                    //dependiente.DependienteTipo = new ML.DependienteTipo();
                     return View(dependiente);
                 }
                 else
@@ -110,8 +112,7 @@ namespace PL.Controllers
                     {
                         ViewBag.Mensaje = "Ocurrio un error al ejecutar GetById" + resultDependiente.ErrorMessage;
                         return View("Modal");
-                    }
-                   
+                    }                   
                 }
             }
             else
@@ -130,6 +131,9 @@ namespace PL.Controllers
                 result = BL.Dependientes.Add(dependiente);
                 if (result.Correct)
                 {
+
+                    ML.Result resultDependienteTipo = BL.DependienteTipo.GetAll();
+                    dependiente.DependienteTipo.DependientesTipo = resultDependienteTipo.Objects;
                     ViewBag.Mensaje = "El Dependiente se agrego Correctamente";
                 }
                 else

@@ -33,7 +33,7 @@
                 </div>
                 <div class="hidden">
                     <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.Nombre)
+                        @Html.LabelFor(model => model.Nombre )
                         @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre"})
                         @Html.ValidationMessageFor(model => model.Nombre)
                     </div>
@@ -99,19 +99,11 @@
                  <div class="hidden">
                     <div class="col-md-4 col-12 col-sm-6">
                         @Html.LabelFor(model => model.DependienteTipo.IdDependienteTipo)
-                        @Html.TextBoxFor(model => model.DependienteTipo.IdDependienteTipo, new { @class = "form-control", @id = "txtIdDependienteTipo"})
+                        @*@Html.TextBoxFor(model => model.DependienteTipo.IdDependienteTipo, new { @class = "form-control", @id = "txtIdDependienteTipo"})*@
+                        @Html.DropDownListFor(model => model.DependienteTipo.IdDependienteTipo, new SelectList(Model.DependienteTipo.DependientesTipo, "IdDependienteTipo", "Nombre"), "selecciona un tipo de dependiente", new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.DependienteTipo.IdDependienteTipo)
                     </div>
-                </div> 
-
-                @*<div class="col">
-                    <div class="col-md-4 col-12 col-sm-6">
-                        @Html.LabelFor(model => model.DependienteTipo)
-                        @Html.DropDownListFor(model => model.DependienteTipo.IdDependienteTipo, new SelectList(Model.DependienteTipo.DependientesTipo, "IdDependiente", "Nombre"), "Selecciona un Tipo de Dependiente", new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.DependienteTipo)
-                    </div>
-                </div>*@
-               
+                </div>              
                
                
                 <div class="col">

@@ -18,8 +18,8 @@
    <div class="col">        
        <div class="col-md-4 col-12 col-sm-6">            
             @Html.LabelFor(model => model.Empresa)
-            @*@Html.DropDownListFor(model => model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Selecciona una Empresa", new { @class = "form-control" })*@
-            @Html.TextBoxFor(model => model.Empresa.IdEmpresa, new { @class = "form-control", @id = "txtIdEmpresa" })
+            @Html.DropDownListFor(model => model.Empresa.IdEmpresa, new SelectList(Model.Empresa.Empresas, "IdEmpresa", "Nombre"), "Selecciona una Empresa", new { @class = "form-control" })
+            @*@Html.TextBoxFor(model => model.Empresa.IdEmpresa, new { @class = "form-control", @id = "txtIdEmpresa" })*@
        </div>
    </div>   
  
@@ -45,7 +45,7 @@
         @foreach (ML.Empleado empleado in Model.Empleados)
         {
             <tr>
-                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("GetByIdEmpleado", "Dependiente", new { NumeroEmpleado = empleado.NumeroEmpleado })"></a></td>
+                <td><a class="btn btn-warning bi-journal-plus"  href="@Url.Action("GetByIdEmpleado", "Dependiente", new { NumeroEmpleado = empleado.NumeroEmpleado })"></a></td>
                 <td>@empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno </td>
                 <td>@empleado.Empresa.Nombre</td>  
                 

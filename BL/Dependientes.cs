@@ -38,9 +38,10 @@ namespace BL
                             dependiente.DependienteTipo = new ML.DependienteTipo();
                             dependiente.DependienteTipo.IdDependienteTipo = obj.IdDependienteTipo.Value;
                             result.Objects.Add(dependiente);
-                            result.Correct = true;
                         }
+                        result.Correct = true;
                     }
+                    
                     else
                     {
                         result.Correct = false;

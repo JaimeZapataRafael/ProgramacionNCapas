@@ -20,6 +20,11 @@ namespace PL.Controllers
         public ActionResult GetAll()
         {
             ML.Usuario usuario = new ML.Usuario();
+
+            usuario.Nombre = (usuario.Nombre == null) ? "" : usuario.Nombre;
+            usuario.ApellidoPaterno = (usuario.ApellidoPaterno == null) ? "" : usuario.ApellidoPaterno;
+            usuario.ApellidoMaterno = (usuario.ApellidoMaterno == null) ? "" : usuario.ApellidoMaterno;
+           
             ML.Result result = BL.Usuario.GetAll(usuario);
 
 
@@ -124,18 +129,18 @@ namespace PL.Controllers
                         }
                     }
 
-                        usuario = (ML.Usuario)resultApi.Object;
+                    usuario = (ML.Usuario)resultApi.Object;
 
-                        ML.Result resultEstado = BL.Estado.EstadoGetByIdPais(usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais);
-                        ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
-                        ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
-                        usuario.Rol.Roles = resultRol.Objects;
-                        usuario.Direccion.Colonia.Colonias = resultColonia.Objects;
-                        usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipio.Objects;
-                        usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstado.Objects;
-                        usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPais.Objects;
+                    ML.Result resultEstado = BL.Estado.EstadoGetByIdPais(usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais);
+                    ML.Result resultMunicipio = BL.Municipio.GetByIdEstado(usuario.Direccion.Colonia.Municipio.Estado.IdEstado);
+                    ML.Result resultColonia = BL.Colonia.GetByIdMunicipio(usuario.Direccion.Colonia.Municipio.IdMunicipio);
+                    usuario.Rol.Roles = resultRol.Objects;
+                    usuario.Direccion.Colonia.Colonias = resultColonia.Objects;
+                    usuario.Direccion.Colonia.Municipio.Municipios = resultMunicipio.Objects;
+                    usuario.Direccion.Colonia.Municipio.Estado.Estados = resultEstado.Objects;
+                    usuario.Direccion.Colonia.Municipio.Estado.Pais.Paises = resultPais.Objects;
 
-                        return View(usuario);
+                    return View(usuario);
                     
                 }
 
